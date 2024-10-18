@@ -83,16 +83,24 @@
     <script>
       // Lógica en JavaScript para gestionar las notas
 
-      // Añadir escucha al formulario para capturar la nueva nota
+      // Añadir escucha al formulario para capturar la nueva nota y validar que no esté vacía
       document
         .getElementById("form-nota")
         .addEventListener("submit", function (event) {
           event.preventDefault(); // Evitar que el formulario recargue la página
-          const contenidoNota = document.getElementById("nueva-nota").value;
+          const contenidoNota = document
+            .getElementById("nueva-nota")
+            .value.trim(); // Eliminar espacios en blanco
 
-          // Crear un nuevo elemento de nota en el DOM
+          // Validar que la nota no esté vacía
+          if (contenidoNota === "") {
+            alert("La nota no puede estar vacía.");
+            return;
+          }
+
+          // Agregar nota al DOM si es válida
           agregarNota(contenidoNota);
-          document.getElementById("nueva-nota").value = ""; // Limpiar el campo
+          document.getElementById("nueva-nota").value = ""; // Limpiar campo
         });
 
       // Función para agregar una nota al DOM
@@ -100,13 +108,25 @@
         const divNota = document.createElement("div");
         divNota.className = "nota";
         divNota.innerHTML = `
-                ${contenido}
-                <div>
-                    <button onclick="eliminarNota(this)">Eliminar</button>
-                </div>
-            `;
+        <span>${contenido}</span>
+        <div>
+            <button onclick="editarNota(this)">Editar</button>
+            <button onclick="eliminarNota(this)">Eliminar</button>
+        </div>
+    `;
 
         document.getElementById("lista-notas").appendChild(divNota);
+      }
+
+      // Función para editar una nota
+      function editarNota(boton) {
+        const nota = boton.parentElement.parentElement;
+        const contenidoActual = nota.querySelector("span").innerText;
+        const nuevoContenido = prompt("Editar nota:", contenidoActual);
+
+        if (nuevoContenido !== null && nuevoContenido.trim() !== "") {
+          nota.querySelector("span").innerText = nuevoContenido.trim();
+        }
       }
 
       // Función para eliminar una nota
@@ -114,9 +134,7 @@
         const nota = boton.parentElement.parentElement;
         document.getElementById("lista-notas").removeChild(nota);
       }
-
-
-      
+    
     </script>
   </body>
 </html>
