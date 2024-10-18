@@ -110,17 +110,24 @@
         divNota.innerHTML = `
         <span>${contenido}</span>
         <div>
-            <button onclick="editarNota(this)">Editar</button>
-            <button onclick="eliminarNota(this)">Eliminar</button>
+            <button class="editar">Editar</button>
+            <button class="eliminar">Eliminar</button>
         </div>
     `;
 
         document.getElementById("lista-notas").appendChild(divNota);
+
+        divNota.querySelector(".eliminar").addEventListener("click", function () {
+          eliminarNota(divNota);
+        });
+
+        divNota.querySelector(".editar").addEventListener("click", function () {
+          editarNota(divNota);
+        });
       }
 
       // Función para editar una nota
-      function editarNota(boton) {
-        const nota = boton.parentElement.parentElement;
+      function editarNota(nota) {
         const contenidoActual = nota.querySelector("span").innerText;
         const nuevoContenido = prompt("Editar nota:", contenidoActual);
 
@@ -130,11 +137,9 @@
       }
 
       // Función para eliminar una nota
-      function eliminarNota(boton) {
-        const nota = boton.parentElement.parentElement;
+      function eliminarNota(nota) {
         document.getElementById("lista-notas").removeChild(nota);
       }
-    
     </script>
   </body>
 </html>
