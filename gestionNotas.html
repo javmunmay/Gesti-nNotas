@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Notas</title>
+    <style>
+      /* Estilos básicos para la aplicación */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f4f4f4;
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+      form {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+      input[type="text"] {
+        width: 300px;
+        padding: 10px;
+        font-size: 16px;
+      }
+      button {
+        padding: 10px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #218838;
+      }
+      #lista-notas {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .nota {
+        background-color: white;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      }
+      .nota button {
+        margin-left: 10px;
+        background-color: #dc3545;
+        color: white;
+        padding: 5px;
+        border: none;
+        cursor: pointer;
+      }
+      .nota button:hover {
+        background-color: #c82333;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Gestión de Notas</h1>
+
+    <!-- Formulario para agregar una nueva nota -->
+    <form id="form-nota">
+      <input
+        type="text"
+        id="nueva-nota"
+        placeholder="Escribe tu nota..."
+        required
+      />
+      <button type="submit">Agregar Nota</button>
+    </form>
+
+    <!-- Lista donde se mostrarán las notas -->
+    <div id="lista-notas"></div>
+
+    <script>
+      // Lógica en JavaScript para gestionar las notas
+
+      // Añadir escucha al formulario para capturar la nueva nota
+      document
+        .getElementById("form-nota")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Evitar que el formulario recargue la página
+          const contenidoNota = document.getElementById("nueva-nota").value;
+
+          // Crear un nuevo elemento de nota en el DOM
+          agregarNota(contenidoNota);
+          document.getElementById("nueva-nota").value = ""; // Limpiar el campo
+        });
+
+      // Función para agregar una nota al DOM
+      function agregarNota(contenido) {
+        const divNota = document.createElement("div");
+        divNota.className = "nota";
+        divNota.innerHTML = `
+                ${contenido}
+                <div>
+                    <button onclick="eliminarNota(this)">Eliminar</button>
+                </div>
+            `;
+
+        document.getElementById("lista-notas").appendChild(divNota);
+      }
+
+      // Función para eliminar una nota
+      function eliminarNota(boton) {
+        const nota = boton.parentElement.parentElement;
+        document.getElementById("lista-notas").removeChild(nota);
+      }
+
+
+      
+    </script>
+  </body>
+</html>
