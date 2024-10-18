@@ -6,60 +6,137 @@
     <title>Gestión de Notas</title>
     <style>
       /* Estilos básicos para la aplicación */
-      body {
-        font-family: Arial, sans-serif;
+
+      *{
         margin: 0;
-        padding: 20px;
-        background-color: #f4f4f4;
+        padding: 0;
+        box-sizing: border-box;
       }
+
+
+
+      body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(right, #ece9e6, #ffffff);
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20%;
+        
+      }
+
       h1 {
         text-align: center;
         color: #333;
+        margin-bottom: 20px;
+        font-size: 2.5em;
+        font-weight: 600;
       }
+
+
       form {
         display: flex;
         justify-content: center;
         margin-bottom: 20px;
+        width: 100%;
+        max-width: 600px;
       }
+
       input[type="text"] {
         width: 300px;
         padding: 10px;
         font-size: 16px;
+        border-radius: 30px;
+        border: 2px solid #ddd;
+        outline: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
       }
+
+      input[type='text']:focus {
+        border-color: #28a745;
+      }
+
       button {
-        padding: 10px;
+        padding: 15px 25px;
+        margin-left: 10px;
         background-color: #28a745;
         color: white;
         border: none;
+        border-radius: 30px;
         cursor: pointer;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
+
       button:hover {
         background-color: #218838;
+        transform: translateY(-3px);
       }
+
       #lista-notas {
         max-width: 600px;
-        margin: 0 auto;
+        width: 100%;
       }
+
       .nota {
         background-color: white;
-        padding: 15px;
-        margin-bottom: 10px;
-        border-radius: 5px;
+        padding: 20px;
+        margin-bottom: 15px;
+        border-radius: 15px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
       }
+
+      .nota:hover {
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .nota span {
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .nota div {
+        display: flex;
+        gap: 10px;
+      }
+
       .nota button {
-        margin-left: 10px;
-        background-color: #dc3545;
-        color: white;
-        padding: 5px;
+        padding: 8px 15px;
+        border-radius: 30px;
         border: none;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         cursor: pointer;
       }
-      .nota button:hover {
+
+      .nota button.editar {
+        background-color: #007bff;
+        color: white;
+      }
+
+      .nota button.editar:hover {
+        background-color: #0056b3;
+        transform: translateY(-3px);
+      }
+
+      .nota button.eliminar {
+        background-color: #dc3545;
+        color: white;
+      }
+
+      .nota button.eliminar:hover {
         background-color: #c82333;
+        transform: translateY(-3px);
       }
     </style>
   </head>
